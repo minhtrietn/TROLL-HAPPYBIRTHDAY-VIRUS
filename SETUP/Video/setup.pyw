@@ -89,7 +89,7 @@ for f in range(5,-1,-1):
     window.update()
     sleep(1)
 
-#AFTER SCREEN
+#AFTER SCREENGUI
 window.config(background='white')
 Image_happy_birthday=PhotoImage(file='C:\\Users\\{}\\Downloads\\SETUP\\Image\\happy_birthday.png'.format(User))
 l1.config(text='HAPPY BIRTHDAY!!!',
