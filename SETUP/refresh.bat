@@ -1,5 +1,5 @@
 @echo off
-     taskkill /fi "imagename eq explorer.exe" /f
-     CD /d %userprofile%\AppData\Local
-     DEL IconCache.db /a
-     START explorer.exe
+taskkill /fi "imagename eq explorer.exe" /f
+cd /d %userprofile%\AppData\Local
+del IconCache.db /a
+start explorer.exe
