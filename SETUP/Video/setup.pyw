@@ -3,29 +3,43 @@ from tkinter import messagebox
 from os import *
 from tkinter import *
 from time import *
+import win32.lib.win32con as win32con
+import ctypes
 
+def getWallpaper():
+    ubuf = ctypes.create_unicode_buffer(512)
+    ctypes.windll.user32.SystemParametersInfoW(win32con.SPI_GETDESKWALLPAPER,len(ubuf),ubuf,0)
+    return ubuf.value
+
+Public=False
 #FIND USER
 User=''
 Folder_Users=listdir('C:\\Users')
 for i in Folder_Users:
     if i not in ['Administrator', 'All Users', 'Default', 'Default User', 'desktop.ini', 'Public']:
         User=i
+    elif i=='Public':
+        Public=True
 User_File=listdir('C:\\Users\\{}'.format(User))
 Desktop_Folder='C:\\Users\\{}\\Desktop'.format(User)
 
 #DELETE BACKUP DESKTOP
 system('rmdir "C:\\Users\\{}\\Downloads\\SETUP\\Backup_Desktop\\Desktop_Save" /s /q'.format(User))
+system('rmdir "C:\\Users\\{}\\Downloads\\SETUP\\Backup_Desktop\\Desktop_Public_Save" /s /q'.format(User))
 
 #COPY DESKTOP
 system('del "C:\\Users\\{}\\Downloads\\SETUP\\Backup_Desktop\\Desktop_Save\\bin.txt" /s /f /q'.format(User))
 copytree(Desktop_Folder,'C:\\Users\\{}\\Downloads\\SETUP\\Backup_Desktop\\Desktop_Save'.format(User))
+if Public==True:
+    Public_Folder='C:\\Users\\Public\\Desktop'
+    copytree(Public_Folder,'C:\\Users\\{}\\Downloads\\SETUP\\Backup_Desktop\\Desktop_Public_Save'.format(User))
 
 #CHANGE BACKGROUND
-copy2('C:\\Users\\{}\\Downloads\\SETUP\\Image\\CachedImage_1366_768_POS4.jpg'.format(User),'C:\\Users\\{}\\Downloads\\SETUP'.format(User))
-replace('C:\\Users\\{}\\Downloads\\SETUP\\CachedImage_1366_768_POS4.jpg'.format(User),'C:\\Users\\{}\\AppData\\Roaming\\Microsoft\\Windows\\Themes\\CachedFiles\\CachedImage_1366_768_POS4.jpg'.format(User))
+BG_Default=getWallpaper()
+BG_Change='C:\\Users\\{}\\Downloads\\SETUP\\Image\\virus.jpg'.format(User)
+ctypes.windll.user32.SystemParametersInfoW(20, 0, "C:\\Users\\{}\\Downloads\\SETUP\\Image\\virus.jpg".format(User) , 0)
 system('C:/Users/{}/Downloads/SETUP/refresh.bat'.format(User))
-sleep(5)
-
+sleep(3)
 #MESSAGEBOX
 messagebox.showwarning(title='WARNING!',message='THE VIRUS HAS ENTERED YOUR PC!!!')
 
@@ -72,7 +86,10 @@ for j in range(10,-1,-1):
     sleep(1)
 
 #DELETE FILE
+FILE_DESKTOP_PUBLIC=listdir('C:\\Users\\Public\\Desktop')
 FILE_DESKTOP=listdir('C:\\Users\\{}\\Desktop'.format(User))
+for k in FILE_DESKTOP_PUBLIC:
+    system('del "C:\\Users\\Public\\Desktop\\{}" /s /f /q'.format(k))
 for k in FILE_DESKTOP:
     system('del "C:\\Users\\{}\\Desktop\\{}" /s /f /q'.format(User,k))
 
@@ -90,6 +107,7 @@ for f in range(5,-1,-1):
     sleep(1)
 
 #AFTER SCREENGUI
+ctypes.windll.user32.SystemParametersInfoW(20, 0, BG_Default , 0)
 window.config(background='white')
 Image_happy_birthday=PhotoImage(file='C:\\Users\\{}\\Downloads\\SETUP\\Image\\happy_birthday.png'.format(User))
 l1.config(text='HAPPY BIRTHDAY!!!',
@@ -99,13 +117,13 @@ l1.config(text='HAPPY BIRTHDAY!!!',
           image=Image_happy_birthday,
           compound='bottom')
 window.state('zoomed')
-
 #RESTORE
+for l in FILE_DESKTOP_PUBLIC:
+    system('move "C:\\Users\\{}\\Downloads\\SETUP\\Backup_Desktop\\Desktop_Public_Save\\{}" "C:\\Users\\Public\\Desktop"'.format(User,l))
 for l in FILE_DESKTOP:
     system('move "C:\\Users\\{}\\Downloads\\SETUP\\Backup_Desktop\\Desktop_Save\\{}" "C:\\Users\\{}\\Desktop"'.format(User,l,User))
-system('del "C:\\Users\\{}\\AppData\\Roaming\\Microsoft\\Windows\\Themes\\CachedFiles\\CachedImage_1366_768_POS4.jpg" /s /f /q'.format(User))
 system('echo.>C:\\Users\\{}\\Downloads\\SETUP\\Backup_Desktop\\Desktop_Save\\bin.txt'.format(User))
-system('C:/Users/{}/Downloads/SETUP/refresh.bat'.format(User))
+system('echo.>C:\\Users\\{}\\Downloads\\SETUP\\Backup_Desktop\\Desktop_Public_Save\\bin.txt'.format(User))
 window.protocol('WM_DELETE_WINDOW',enable_close_button)
 window.mainloop()
 
