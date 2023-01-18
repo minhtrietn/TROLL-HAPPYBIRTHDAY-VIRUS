@@ -5,7 +5,7 @@ HOW TO USE IT?
 4) Open folder "SETUP" then open setup.exe
 5) Enjoy :)))
 
-**Support Window 11
+**Support Window 11/10
 *Support HP PC/laptop
 *DELL/Lunix laptops are not supported...
 
