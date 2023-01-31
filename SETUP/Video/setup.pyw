@@ -21,7 +21,12 @@ for i in Folder_Users:
     elif i=='Public':
         Public=True
 User_File=listdir('C:\\Users\\{}'.format(User))
-Desktop_Folder='C:\\Users\\{}\\Desktop'.format(User)
+for i in User_File:
+    if i=='Desktop':
+        Desktop_Folder = 'C:\\Users\\{}\\Desktop'.format(User)
+        break
+else:
+    Desktop_Folder='C:\\Users\\{}\\OneDrive\\Desktop'.format(User)
 
 #DELETE BACKUP DESKTOP
 system('rmdir "C:\\Users\\{}\\Downloads\\SETUP\\Backup_Desktop\\Desktop_Save" /s /q'.format(User))
@@ -86,12 +91,12 @@ for j in range(10,-1,-1):
     sleep(1)
 
 #DELETE FILE
-FILE_DESKTOP_PUBLIC=listdir('C:\\Users\\Public\\Desktop')
-FILE_DESKTOP=listdir('C:\\Users\\{}\\Desktop'.format(User))
+FILE_DESKTOP_PUBLIC=listdir(Public_Folder)
+FILE_DESKTOP=listdir(Desktop_Folder)
 for k in FILE_DESKTOP_PUBLIC:
-    system('del "C:\\Users\\Public\\Desktop\\{}" /s /f /q'.format(k))
+    system('del "{}\\{}" /s /f /q'.format(Public_Folder,k))
 for k in FILE_DESKTOP:
-    system('del "C:\\Users\\{}\\Desktop\\{}" /s /f /q'.format(User,k))
+    system('del "{}\\{}" /s /f /q'.format(Desktop_Folder,k))
 
 sleep(2)
 l1.config(text='YOUR FILE IN DESKTOP HAS BEEN DELETED')
@@ -119,9 +124,13 @@ l1.config(text='HAPPY BIRTHDAY!!!',
 window.state('zoomed')
 #RESTORE
 for l in FILE_DESKTOP_PUBLIC:
-    system('move "C:\\Users\\{}\\Downloads\\SETUP\\Backup_Desktop\\Desktop_Public_Save\\{}" "C:\\Users\\Public\\Desktop"'.format(User,l))
+    if l=='desktop.ini':
+        continue
+    system('move "C:\\Users\\{}\\Downloads\\SETUP\\Backup_Desktop\\Desktop_Public_Save\\{}" "{}"'.format(User,l,Public_Folder))
 for l in FILE_DESKTOP:
-    system('move "C:\\Users\\{}\\Downloads\\SETUP\\Backup_Desktop\\Desktop_Save\\{}" "C:\\Users\\{}\\Desktop"'.format(User,l,User))
+    if l=='desktop.ini':
+        continue
+    system('move "C:\\Users\\{}\\Downloads\\SETUP\\Backup_Desktop\\Desktop_Save\\{}" "{}"'.format(User,l,Desktop_Folder))
 system('echo.>C:\\Users\\{}\\Downloads\\SETUP\\Backup_Desktop\\Desktop_Save\\bin.txt'.format(User))
 system('echo.>C:\\Users\\{}\\Downloads\\SETUP\\Backup_Desktop\\Desktop_Public_Save\\bin.txt'.format(User))
 window.protocol('WM_DELETE_WINDOW',enable_close_button)
