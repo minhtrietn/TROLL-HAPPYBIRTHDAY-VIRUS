@@ -6,6 +6,7 @@ from time import *
 import win32.lib.win32con as win32con
 import ctypes
 
+#FIND WALLPAPER FUNCTION
 def getWallpaper():
     ubuf = ctypes.create_unicode_buffer(512)
     ctypes.windll.user32.SystemParametersInfoW(win32con.SPI_GETDESKWALLPAPER,len(ubuf),ubuf,0)
