@@ -7,7 +7,6 @@ HOW TO USE IT?
 
 **Support Window 11/10
 *Support HP PC/laptop
-*DELL/Lunix laptops are not supported...
 
 **TESTED**
 *IF IT HAS A BUG PLEASE CONTACT ME IN GMAIL: minhtriet2009n@gmail.com
