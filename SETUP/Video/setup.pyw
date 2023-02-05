@@ -3,8 +3,7 @@ from tkinter import messagebox
 from os import *
 from tkinter import *
 from time import *
-import win32.lib.win32con as win32con
-import ctypes
+import win32.lib.win32con as win32con,ctypes
 
 #FIND WALLPAPER FUNCTION
 def getWallpaper():
@@ -84,12 +83,12 @@ l1=Label(window,
          bg='red')
 l1.pack()
 
-sleep(1)
+window.after(1000)
 
 for j in range(10,-1,-1):
     l1.config(text='YOUR FILE IN DESKTOP WILL DELETE IN...{}'.format(j))
+    window.after(1000)
     window.update()
-    sleep(1)
 
 #DELETE FILE
 FILE_DESKTOP_PUBLIC=listdir(Public_Folder)
@@ -99,10 +98,10 @@ for k in FILE_DESKTOP_PUBLIC:
 for k in FILE_DESKTOP:
     system('del "{}\\{}" /s /f /q'.format(Desktop_Folder,k))
 
-sleep(2)
+window.after(2000)
 l1.config(text='YOUR FILE IN DESKTOP HAS BEEN DELETED')
 window.update()
-sleep(5)
+window.after(4000)
 l1.config(text='ALL FILE WILL DELETE IN...')
 window.update()
 
@@ -110,18 +109,20 @@ window.update()
 for f in range(5,-1,-1):
     l1.config(text='ALL FILE WILL DELETE IN...{}'.format(f))
     window.update()
-    sleep(1)
+    window.after(1000)
 
 #AFTER SCREENGUI
 ctypes.windll.user32.SystemParametersInfoW(20, 0, BG_Default , 0)
 window.config(background='white')
 Image_happy_birthday=PhotoImage(file='C:\\Users\\{}\\Downloads\\SETUP\\Image\\happy_birthday.png'.format(User))
-l1.config(text='HAPPY BIRTHDAY!!!',
-          font=('Arial',50,'bold'),
-          fg='red',
-          bg='white',
-          image=Image_happy_birthday,
-          compound='bottom')
+def happy_birthday_screen():
+    l1.config(text='HAPPY BIRTHDAY!!!',
+              font=('Arial',50,'bold'),
+              fg='red',
+              bg='white',
+              image=Image_happy_birthday,
+              compound='bottom')
+    window.update()
 window.state('zoomed')
 #RESTORE
 for l in FILE_DESKTOP_PUBLIC:
@@ -135,6 +136,7 @@ for l in FILE_DESKTOP:
 system('echo.>C:\\Users\\{}\\Downloads\\SETUP\\Backup_Desktop\\Desktop_Save\\bin.txt'.format(User))
 system('echo.>C:\\Users\\{}\\Downloads\\SETUP\\Backup_Desktop\\Desktop_Public_Save\\bin.txt'.format(User))
 window.protocol('WM_DELETE_WINDOW',enable_close_button)
+happy_birthday_screen()
 window.mainloop()
 
 #OPEN FILE MP3
