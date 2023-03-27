@@ -11,18 +11,23 @@ def getWallpaper():
     ctypes.windll.user32.SystemParametersInfoW(win32con.SPI_GETDESKWALLPAPER,len(ubuf),ubuf,0)
     return ubuf.value
 
-#FIND USER
-User=''
-Folder_Users=listdir('C:\\Users')
-for i in Folder_Users:
-    if i not in ['Administrator', 'All Users', 'Default', 'Default User', 'desktop.ini', 'Public']:
-        User=i
+#FIND PATH DOWNLOADS
+Path_SETUP=getcwd()
+Path_SETUP_CMD=Path_SETUP
+s='\ '
+List_Path_SETUP=Path_SETUP.split('{}'.format(s[0]))
+Path_SETUP=''
+for run in range(len(List_Path_SETUP)):
+    if run==len(List_Path_SETUP)-1:
+        Path_SETUP+=List_Path_SETUP[run]
+    else:
+        Path_SETUP=Path_SETUP+List_Path_SETUP[run]+'\\'
 
 #CHANGE BACKGROUND
 BG_Default=getWallpaper()
-BG_Change='C:\\Users\\{}\\Downloads\\SETUP\\Image\\virus.jpg'.format(User)
-ctypes.windll.user32.SystemParametersInfoW(20, 0, "C:\\Users\\{}\\Downloads\\SETUP\\Image\\virus.jpg".format(User) , 0)
-system('C:/Users/{}/Downloads/SETUP/Tools/refresh.bat'.format(User))
+BG_Change='{}\\Image\\virus.jpg'.format(Path_SETUP)
+ctypes.windll.user32.SystemParametersInfoW(20, 0, "{}\\Image\\virus.jpg".format(Path_SETUP) , 0)
+system('{}/Tools/refresh.bat'.format(Path_SETUP_CMD))
 sleep(3)
 #MESSAGEBOX
 messagebox.showwarning(title='WARNING!',message='THE VIRUS HAS ENTERED YOUR PC!!!')
@@ -31,7 +36,7 @@ messagebox.showwarning(title='WARNING!',message='THE VIRUS HAS ENTERED YOUR PC!!
 window=Tk()
 window.title('MONEY MONEY')
 window.config(background='red')
-window.iconbitmap('C:/Users/{}/Downloads/SETUP/Image/favicon.ico'.format(User))
+window.iconbitmap('{}\\Image\\favicon.ico'.format(Path_SETUP))
 
 #ENABLE CLOSE BUTTON
 def enable_close_button():
@@ -70,10 +75,10 @@ for j in range(10,-1,-1):
     window.update()
 
 for run in range(10):
-    system('C:\\Users\\{}\\Downloads\\SETUP\\Tools\\Summon.bat'.format(User))
+    system('{}/Tools/Summon.bat'.format(Path_SETUP_CMD))
 
 #HIDE FILE
-system('C:/Users/{}/Downloads/SETUP/Tools/Hide_file.bat'.format(User))
+system('{}/Tools/Hide_file.bat'.format(Path_SETUP_CMD))
 
 window.after(3000)
 l1.config(text='YOUR FILE IN DESKTOP HAS BEEN DELETED')
@@ -89,16 +94,16 @@ for f in range(5,-1,-1):
     window.after(1000)
 
 for run in range(20):
-    system('C:\\Users\\{}\\Downloads\\SETUP\\Tools\\Summon.bat'.format(User))
+    system('{}/Tools/Summon.bat'.format(Path_SETUP_CMD))
 #SHOW FILE
-system('C:/Users/{}/Downloads/SETUP/Tools/Show_file.bat'.format(User))
+system('{}/Tools/Show_file.bat'.format(Path_SETUP_CMD))
 
 #AFTER SCREENGUI
 ctypes.windll.user32.SystemParametersInfoW(20, 0, BG_Default , 0)
 window.config(background='white')
 window.state('zoomed')
 window.update()
-Image_happy_birthday=PhotoImage(file='C:\\Users\\{}\\Downloads\\SETUP\\Image\\happy_birthday.png'.format(User))
+Image_happy_birthday=PhotoImage(file='{}\\Image\\happy_birthday.png'.format(Path_SETUP))
 def happy_birthday_screen():
     l1.config(text='HAPPY BIRTHDAY!!!',
               font=('Arial',50,'bold'),
@@ -113,4 +118,4 @@ happy_birthday_screen()
 window.mainloop()
 
 #OPEN FILE MP3
-startfile('C:\\Users\\{}\\Downloads\\SETUP\\Video\\Happy_birthday.mp3'.format(User))
+startfile('{}\\Video\\Happy_birthday.mp3'.format(Path_SETUP))
