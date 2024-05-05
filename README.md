@@ -1,5 +1,4 @@
-# EN-US
-**HOW TO USE IT?**
+# HOW TO USE IT?
 
 ## The first way:
 1) Download the zip file in github
@@ -23,8 +22,7 @@
 *IF IT HAS A BUG, PLEASE CONTACT ME IN GMAIL: minhtriet2009n@gmail.com*
 
 
-# VI-VN
-**CÁCH SỬ DỤNG?**
+# CÁCH SỬ DỤNG?
 
 ## Cách thứ nhất:
 1) Tải file trên từ github
