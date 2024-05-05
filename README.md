@@ -17,8 +17,6 @@
 **Support Window 11/10**
 **Support PC/Laptop**
 
-**TESTED**
-
 *IF IT HAS A BUG, PLEASE CONTACT ME IN GMAIL: minhtriet2009n@gmail.com*
 
 
@@ -40,7 +38,5 @@
 
 **Hỗ trợ Window 11/10**
 **Hỗ trợ các dòng PC/Laptop**
-
-**THỬ NGHIỆM**
 
 *NẾU CÓ LỖI, VUI LÒNG LIÊN HỆ TÔI QUA ĐỊA CHỈ GMAIL: minhtriet2009n@gmail.com*
